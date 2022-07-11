@@ -2,7 +2,7 @@
 *.pyc
 
 #Mac Specific files
-.DS_store
+.DS_Store
 
 
 # Byte-compiled / optimized / DLL files
