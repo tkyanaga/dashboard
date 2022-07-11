@@ -15,7 +15,7 @@ debugFlag = False
 settingsFlag = False
 piTFT = True
 startTime = datetime.datetime.today().strftime('%Y%m%d%H%M%S') 
-RESOLUTION = (720, 720)
+RESOLUTION = (480, 320)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 # LUT representing the speeds at each of the five gears. Each entry is +200 RPM, and is directly linked to rpmList.

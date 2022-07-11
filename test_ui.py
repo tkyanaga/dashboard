@@ -1,7 +1,8 @@
 #!/usr/bin/python
-import config, log, time, datetime, sys 
+import log, time, datetime, sys 
 import pygame, time, os, csv
 import ecu2 as ecu
+import config_test_ui as config
 
 from pygame.locals import *
 # Helper function to draw the given string at coordinate x,y, relative to center.
@@ -47,7 +48,7 @@ labelFont = pygame.font.Font("/home/pi/font/Hyperjump_Bold.ttf",30)
 fpsFont = pygame.font.Font("/home/pi/font/Hyperjump_Bold.ttf",20)
 
 # Set the caption.
-pygame.display.set_caption('M3 PI')
+pygame.display.set_caption('vw pickup instruments')
 
 # Create a clock object to use so we can log every second.
 clock = pygame.time.Clock()
@@ -108,45 +109,45 @@ while True:
               windowSurface.blit(ground[ecu.tach_iter], coords)
              
               # Draw the RPM readout and label.
-              drawText(str(ecu.rpm), 0, 0, "readout") 
+              drawText(str(1234), 0, 0, "readout") 
               drawText("RPM", 0, 50, "label")
               
               # Draw the intake temp readout and label.
-              drawText(str(ecu.intakeTemp) + "\xb0C", 190, 105, "readout") 
+              drawText(str(89) + "\xb0C", 190, 105, "readout") 
               drawText("Intake", 190, 140, "label")
               
               # Draw the coolant temp readout and label.
-              drawText(str(ecu.coolantTemp) + "\xb0C", -160, 105, "readout") 
+              drawText(str(123) + "\xb0C", -160, 105, "readout") 
               drawText("Coolant", -170, 140, "label")
               
               # Draw the gear readout and label.
-              drawText(str(ecu.gear), -190, 0, "readout") 
+              drawText(str(n), -190, 0, "readout") 
               drawText("Gear", -190, 50, "label")
               
               # Draw the speed readout and label.
-              drawText(str(ecu.speed) + " mph", 170, 0, "readout") 
+              drawText(str(0) + " mph", 170, 0, "readout") 
               drawText("Speed", 180, 50, "label")
               
               # Draw the throttle position readout and label.
-              drawText(str(ecu.throttlePosition) + " %", 190, -145, "readout") 
+              drawText(str(0) + " %", 190, -145, "readout") 
               drawText("Throttle", 190, -110, "label")
               
               # Draw the MAF readout and label.
-              drawText(str(ecu.MAF) + " g/s", -150, -145, "readout") 
+              drawText(str(12) + " g/s", -150, -145, "readout") 
               drawText("MAF", -190, -110, "label")
               
               # Draw the engine load readout and label.
-              drawText(str(ecu.engineLoad) + " %", 0, -145, "readout") 
+              drawText(str(12) + " %", 0, -145, "readout") 
               drawText("Load", 0, -110, "label")
               
-              # If debug flag is set, feed fake data so we can test the GUI.
+"""              # If debug flag is set, feed fake data so we can test the GUI.
               if config.debugFlag:
                      # Debug gui display refresh 10 times a second. 
                      if config.gui_test_time > 500:
                             log.getLogValues(list) 
                             ecu.calcGear(ecu.rpm, ecu.speed) 
                             ecu.getTach() 
-                            config.gui_test_time = 0
+                            config.gui_test_time = 0"""
        # Update the clock.
        dt = clock.tick()
 
