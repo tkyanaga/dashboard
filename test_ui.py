@@ -140,14 +140,14 @@ while True:
               drawText(str(12) + " %", 0, -145, "readout") 
               drawText("Load", 0, -110, "label")
               
-"""              # If debug flag is set, feed fake data so we can test the GUI.
+              # If debug flag is set, feed fake data so we can test the GUI.
               if config.debugFlag:
                      # Debug gui display refresh 10 times a second. 
                      if config.gui_test_time > 500:
                             log.getLogValues(list) 
                             ecu.calcGear(ecu.rpm, ecu.speed) 
                             ecu.getTach() 
-                            config.gui_test_time = 0"""
+                            config.gui_test_time = 0
        # Update the clock.
        dt = clock.tick()
 

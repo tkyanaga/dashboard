@@ -5,20 +5,20 @@ from config import *
 # Function to create a csv with the specified header. 
 def createLog(header): 
 	# Write the header of the csv file. 
-	with open('/home/pi/logs/' + startTime + '.csv', 'wb') as f: 
+	with open('/home/pi/dashboard/logs/' + startTime + '.csv', 'wb') as f: 
 		w = csv.writer(f) 
 		w.writerow(header) 
 
 # Function to append to the current log file. 
 def updateLog(data): 
-	with open('/home/pi/logs/' + startTime + '.csv', 'a') as f: 
+	with open('/home/pi/dashboard/logs/' + startTime + '.csv', 'a') as f: 
 		w = csv.writer(f) 
 		w.writerow(data) 
 
 # Function to close the log and rename it to include end time. 
 def closeLog(): 
 	endTime = datetime.datetime.today().strftime('%Y%m%d%H%M%S') 
-	os.rename('home/pi/logs/' + startTime + '.csv', 'logs/' + startTime + "_" + endTime + '.csv') 
+	os.rename('home/pi/dashboard/logs/' + startTime + '.csv', 'logs/' + startTime + "_" + endTime + '.csv') 
 
 # Debug function to read from log file for GUI testing. 
 def readLog(logFile): 
