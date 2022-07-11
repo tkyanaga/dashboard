@@ -1,3 +1,10 @@
+#compiled python files
+*.pyc
+
+#Mac Specific files
+.DS_store
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
