@@ -5,7 +5,7 @@ from config import *
 # Function to create a csv with the specified header. 
 def createLog(header): 
 	# Write the header of the csv file. 
-	with open('/home/pi/dashboard/logs/' + startTime + '.csv', 'wb') as f: 
+	with open('/home/pi/dashboard/logs/' + startTime + '.csv', 'w') as f: 
 		w = csv.writer(f) 
 		w.writerow(header) 
 

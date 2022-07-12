@@ -21,6 +21,7 @@ connection = None
 dtc = None
 runTime = 0
 oilTemp = 0
+startingMileage = 0
 
 # Function to figure out what tach image we should display based on the RPM. 
 def getTach(): 
@@ -49,6 +50,9 @@ def calcGear(rpm, speed):
 		# Find the index of the closest speed to our speed. 
 		closestSpeedIndx = find_nearest(config.speedArr[closestRPMIndx], speed) 
 		gear = str (closestSpeedIndx + 1) 
+
+#using odo, display trip miles, fuel input -> mpg
+
 class ecuThread(Thread): 
 	def __init__(self): 
 		Thread.__init__(self) 
