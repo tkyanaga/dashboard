@@ -77,7 +77,8 @@ class ecuThread(Thread):
 		connection.watch(obd.commands.GET_DTC, callback=self.new_dtc) 
 		connection.watch(obd.commands.RUN_TIME, callback=self.new_engine_run_time)
 		connection.watch(obd.commands.OIL_TEMP, callback=self.new_oil_temp)
-		connection.watch(obd.commands.ODOMETER, callback=self.new_odometer)
+		if connection.supports(obd.commands.ODOMETER):
+			connection.watch(obd.commands.ODOMETER, callback=self.new_odometer)
 
 		# Start the connection. 
 		connection.start() 
