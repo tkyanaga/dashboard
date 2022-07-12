@@ -77,6 +77,8 @@ class ecuThread(Thread):
 		connection.watch(obd.commands.GET_DTC, callback=self.new_dtc) 
 		connection.watch(obd.commands.RUN_TIME, callback=self.new_engine_run_time)
 		connection.watch(obd.commands.OIL_TEMP, callback=self.new_oil_temp)
+		connection.watch(obd.commands.ODOMETER, callback=self.new_odometer)
+
 		# Start the connection. 
 		connection.start() 
 		# Set the ready flag so we can boot the GUI. 
@@ -115,3 +117,6 @@ class ecuThread(Thread):
 	def new_oil_temp(self, r):
 		global oilTemp
 		oilTemp = r.value.magnitude
+	def new_odometer(self, r):
+		global startingMileage
+		startingMileage = r.value.magnitude

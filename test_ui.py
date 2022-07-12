@@ -137,12 +137,16 @@ while True:
               drawText("Coolant", -170, 140, "label")
               
               # Draw the coolant temp readout and label.
-              drawText(str(ecu.runTime) + "\xb0s", 0, 105, "readout") 
+              drawText(str(ecu.runTime) + "s", 0, 105, "readout") 
               drawText("Run Time", 0, 140, "label")
 
               # Draw the intake temp readout and label.
               drawText(str(ecu.intakeTemp) + "\xb0C", 190, 105, "readout") 
               drawText("Intake", 190, 140, "label")
+
+              # Draw the mileage readout and label.
+              drawText(str(ecu.startingMileage) + "Km", -160, 165, "readout") 
+              drawText("Mileage", -170, 200, "label")
 
 
 
