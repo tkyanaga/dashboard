@@ -145,8 +145,8 @@ while True:
               drawText("Intake", 190, 140, "label")
 
               # Draw the mileage readout and label.
-              drawText(str(ecu.startingMileage) + "Km", -160, 165, "readout") 
-              drawText("Mileage", -170, 200, "label")
+              drawText(str(ecu.startingMileage) + "Km", -160, 210, "readout") 
+              drawText("Mileage", -170, 245, "label")
 
 
 
