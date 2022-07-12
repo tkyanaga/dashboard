@@ -27,10 +27,10 @@ if not config.debugFlag:
               time.sleep(.01)
 # Load all of our tach images into an array so we can easily access them.
 background_files = ['%i.png' % i for i in range(0, 42)]
-ground = [pygame.image.load(os.path.join("/home/pi/Dashboard/tach/", file)) for file in background_files]
+ground = [pygame.image.load(os.path.join("/home/pi/dashboard/tach/", file)) for file in background_files]
 
 # Load the M3 PI image.
-img = pygame.image.load("/home/pi/Dashboard/images/m3_logo.png") 
+img = pygame.image.load("/home/pi/dashboard/images/m3_logo.png") 
 img_button = img.get_rect(topleft=(135, 220))
 
 # Set up the window. If piTFT flag is set, set up the window for the screen. Else create it normally for use on normal monitor.
