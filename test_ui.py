@@ -60,7 +60,7 @@ log.createLog(["TIME", "RPM", "SPEED", "COOLANT_TEMP", "INTAKE_TEMP", "MAF", "TH
 if config.debugFlag:
 
        # Read the log file into memory.
-       list = log.readLog('/logs/debug_log.csv') # Get the length of the log.
+       list = log.readLog('./logs/debug_log.csv') # Get the length of the log.
        logLength = len(list)
 
 # Run the game loop
