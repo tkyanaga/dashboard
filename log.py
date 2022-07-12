@@ -22,7 +22,7 @@ def closeLog():
 
 # Debug function to read from log file for GUI testing. 
 def readLog(logFile): 
-	with open(logFile, 'rb') as f: 
+	with open(logFile, 'r') as f: 
 		reader = csv.reader(f) 
 		logList = list(reader) 
 	return logList 
