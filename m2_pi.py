@@ -25,7 +25,7 @@ if not config.debugFlag:
        while not config.ecuReady: 
               time.sleep(.01)
 # Load all of our tach images into an array so we can easily access them.
-background_files = ['%i.png' % i for i in range(0, 42)]
+background_files = ['%i.png' % i for i in range(1, 42)]
 ground = [pygame.image.load(os.path.join("/home/pi/dashboard/tach/", file)) for file in background_files]
 
 # Load the M3 PI image.

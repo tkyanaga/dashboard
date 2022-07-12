@@ -18,7 +18,9 @@ engineLoad = 0
 tach_iter = 0 
 gear = 0 
 connection = None 
-dtc = None 
+dtc = None
+runTime = 0
+oilTemp = 0
 
 # Function to figure out what tach image we should display based on the RPM. 
 def getTach(): 
@@ -69,6 +71,8 @@ class ecuThread(Thread):
 		connection.watch(obd.commands.THROTTLE_POS, callback=self.new_throttle_position) 
 		connection.watch(obd.commands.ENGINE_LOAD, callback=self.new_engine_load) 
 		connection.watch(obd.commands.GET_DTC, callback=self.new_dtc) 
+		connection.watch(obd.commands.RUN_TIME, callback=self.new_engine_run_time)
+		connection.watch(obd.commands.OIL_TEMP, callback=self.new_oil_temp)
 		# Start the connection. 
 		connection.start() 
 		# Set the ready flag so we can boot the GUI. 
@@ -100,4 +104,10 @@ class ecuThread(Thread):
 		engineLoad = int(round(r.value.magnitude)) 
 	def new_dtc(self, r): 
 		global dtc 
-		dtc = r.value 
+		dtc = r.value
+	def new_engine_run_time(self, r): 
+		global runTime 
+		runTime = r.value.magnitude
+	def new_oil_temp(self, r):
+		global oilTemp
+		oilTemp = r.value.magnitude

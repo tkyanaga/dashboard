@@ -27,10 +27,10 @@ if not config.debugFlag:
               time.sleep(.01)
 # Load all of our tach images into an array so we can easily access them.
 background_files = ['%i.png' % i for i in range(1, 42)]
-ground = [pygame.image.load(os.path.join("~/dashboard/tach/", file)) for file in background_files]
+ground = [pygame.image.load(os.path.join("/home/pi/dashboard/tach/", file)) for file in background_files]
 
 # Load the M3 PI image.
-img = pygame.image.load("~/dashboard/images/m3_logo.png") 
+img = pygame.image.load("/home/pi/dashboard/images/vw_rabbit_black_icon_tiny.png") 
 img_button = img.get_rect(topleft=(135, 220))
 
 # Set up the window. If piTFT flag is set, set up the window for the screen. Else create it normally for use on normal monitor.
@@ -38,7 +38,7 @@ if config.piTFT:
        os.putenv('SDL_FBDEV', ' /dev/fb1')
        pygame.init()
        pygame.mouse.set_visible(0)
-       windowSurface = pygame.display.set_mode(config.RESOLUTION)
+       windowSurface = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 else:
        windowSurface = pygame.display.set_mode(config.RESOLUTION, 0, 32)
 
@@ -107,38 +107,45 @@ while True:
               
               # Load the tach image
               windowSurface.blit(ground[ecu.tach_iter], coords)
-             
-              # Draw the RPM readout and label.
-              drawText(str(1234), 0, 0, "readout") 
-              drawText("RPM", 0, 50, "label")
-              
-              # Draw the intake temp readout and label.
-              drawText(str(89) + "\xb0C", 190, 105, "readout") 
-              drawText("Intake", 190, 140, "label")
-              
-              # Draw the coolant temp readout and label.
-              drawText(str(123) + "\xb0C", -160, 105, "readout") 
-              drawText("Coolant", -170, 140, "label")
-              
-              # Draw the gear readout and label.
-              drawText(str(n), -190, 0, "readout") 
-              drawText("Gear", -190, 50, "label")
-              
-              # Draw the speed readout and label.
-              drawText(str(0) + " mph", 170, 0, "readout") 
-              drawText("Speed", 180, 50, "label")
-              
-              # Draw the throttle position readout and label.
-              drawText(str(0) + " %", 190, -145, "readout") 
-              drawText("Throttle", 190, -110, "label")
               
               # Draw the MAF readout and label.
-              drawText(str(12) + " g/s", -150, -145, "readout") 
+              drawText(str(ecu.MAF) + " g/s", -150, -145, "readout") 
               drawText("MAF", -190, -110, "label")
               
               # Draw the engine load readout and label.
-              drawText(str(12) + " %", 0, -145, "readout") 
+              drawText(str(ecu.engineLoad) + " %", 0, -145, "readout") 
               drawText("Load", 0, -110, "label")
+              
+              # Draw the throttle position readout and label.
+              drawText(str(ecu.throttlePosition) + " %", 190, -145, "readout") 
+              drawText("Throttle", 190, -110, "label")
+              
+              # Draw the gear readout and label.
+              drawText(str(ecu.gear), -190, 0, "readout") 
+              drawText("Gear", -190, 50, "label")
+
+              # Draw the RPM readout and label.
+              drawText(str(ecu.rpm), 0, 0, "readout") 
+              drawText("RPM", 0, 50, "label")
+
+              # Draw the speed readout and label.
+              drawText(str(ecu.speed) + " mph", 170, 0, "readout") 
+              drawText("Speed", 180, 50, "label")
+              
+              # Draw the coolant temp readout and label.
+              drawText(str(ecu.coolantTemp) + "\xb0C", -160, 105, "readout") 
+              drawText("Coolant", -170, 140, "label")
+              
+              # Draw the coolant temp readout and label.
+              drawText(str(ecu.runTime) + "\xb0s", 0, 105, "readout") 
+              drawText("Run Time", 0, 140, "label")
+
+              # Draw the intake temp readout and label.
+              drawText(str(ecu.intakeTemp) + "\xb0C", 190, 105, "readout") 
+              drawText("Intake", 190, 140, "label")
+
+
+
               
               # If debug flag is set, feed fake data so we can test the GUI.
               if config.debugFlag:
