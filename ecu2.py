@@ -22,6 +22,7 @@ dtc = None
 runTime = 0
 oilTemp = 0
 startingMileage = 0
+fuelLevel = 0
 
 # Function to figure out what tach image we should display based on the RPM. 
 def getTach(): 
@@ -79,6 +80,7 @@ class ecuThread(Thread):
 		connection.watch(obd.commands.OIL_TEMP, callback=self.new_oil_temp)
 		if connection.supports(obd.commands.ODOMETER):
 			connection.watch(obd.commands.ODOMETER, callback=self.new_odometer)
+		connection.watch(obd.commands.FUEL_LEVEL, callback=self.new_fuelLevel)
 
 		# Start the connection. 
 		connection.start() 
@@ -121,3 +123,6 @@ class ecuThread(Thread):
 	def new_odometer(self, r):
 		global startingMileage
 		startingMileage = r.value.magnitude
+	def new_fuelLevel(self, r):
+		global fuelLevel
+		fuelLevel = int(round(r.value.magnitude))
