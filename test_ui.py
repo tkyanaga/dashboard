@@ -87,7 +87,7 @@ while True:
        # Clear the screen
        windowSurface.fill(config.BLACK)
        # Load the M3 logo
-       windowSurface.blit(img, (windowSurface.get_rect().centerx - 105,windowSurface.get_rect().centery + 60))
+       windowSurface.blit(img, (windowSurface.get_rect().centerx - 205,windowSurface.get_rect().centery + 60))
        
        # If the settings button has been pressed:
        if (config.settingsFlag):
