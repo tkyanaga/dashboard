@@ -87,7 +87,7 @@ while True:
        # Clear the screen
        windowSurface.fill(config.BLACK)
        # Load the M3 logo
-       windowSurface.blit(img, (windowSurface.get_rect().centerx - 5,windowSurface.get_rect().centery + 120))
+       windowSurface.blit(img, (windowSurface.get_rect().centerx - 5,windowSurface.get_rect().centery + 140))
        
        # If the settings button has been pressed:
        if (config.settingsFlag):
@@ -144,7 +144,7 @@ while True:
               drawText(str(ecu.intakeTemp) + "\xb0C", 190, 105, "readout") 
               drawText("Intake", 190, 140, "label")
 
-              # Draw the mileage readout and label.
+              # Draw the oil temp readout and label.
               drawText(str(ecu.oilTemp) + "\xb0C", -160, 210, "readout") 
               drawText("Oil Temp", -170, 245, "label")
 

@@ -1,7 +1,8 @@
 #!/usr/bin/python
-import config, log, time, datetime, sys 
+import log, time, datetime, sys 
 import pygame, time, os, csv
 import ecu2 as ecu
+import config
 
 from pygame.locals import *
 # Helper function to draw the given string at coordinate x,y, relative to center.
@@ -28,16 +29,16 @@ if not config.debugFlag:
 background_files = ['%i.png' % i for i in range(1, 42)]
 ground = [pygame.image.load(os.path.join("/home/pi/dashboard/tach/", file)) for file in background_files]
 
-# Load the M3 PI image.
-img = pygame.image.load("/home/pi/dashboard/images/m3_logo.png") 
-img_button = img.get_rect(topleft=(135, 220))
+# Load the vw PI image.
+img = pygame.image.load("/home/pi/dashboard/images/vw_rabbit_black_icon_tiny.png") 
+img_button = img.get_rect(topleft=(0, 100))
 
 # Set up the window. If piTFT flag is set, set up the window for the screen. Else create it normally for use on normal monitor.
 if config.piTFT:
        os.putenv('SDL_FBDEV', ' /dev/fb1')
        pygame.init()
        pygame.mouse.set_visible(0)
-       windowSurface = pygame.display.set_mode(config.RESOLUTION)
+       windowSurface = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 else:
        windowSurface = pygame.display.set_mode(config.RESOLUTION, 0, 32)
 
@@ -47,7 +48,7 @@ labelFont = pygame.font.Font("/home/pi/font/Hyperjump_Bold.ttf",30)
 fpsFont = pygame.font.Font("/home/pi/font/Hyperjump_Bold.ttf",20)
 
 # Set the caption.
-pygame.display.set_caption('M3 PI')
+pygame.display.set_caption('vw pickup instruments')
 
 # Create a clock object to use so we can log every second.
 clock = pygame.time.Clock()
@@ -59,7 +60,7 @@ log.createLog(["TIME", "RPM", "SPEED", "COOLANT_TEMP", "INTAKE_TEMP", "MAF", "TH
 if config.debugFlag:
 
        # Read the log file into memory.
-       list = log.readLog('/logs/debug_log.csv') # Get the length of the log.
+       list = log.readLog('/home/pi/dashboard/logs/debug_log.csv') # Get the length of the log.
        logLength = len(list)
 
 # Run the game loop
@@ -86,7 +87,7 @@ while True:
        # Clear the screen
        windowSurface.fill(config.BLACK)
        # Load the M3 logo
-       windowSurface.blit(img, (windowSurface.get_rect().centerx - 105,windowSurface.get_rect().centery + 60))
+       windowSurface.blit(img, (windowSurface.get_rect().centerx - 5,windowSurface.get_rect().centery + 140))
        
        # If the settings button has been pressed:
        if (config.settingsFlag):
@@ -105,31 +106,7 @@ while True:
               coords = (windowSurface.get_rect().centerx - 200, windowSurface.get_rect().centery - 200)
               
               # Load the tach image
-              windowSurface.blit(ground[ecu.tach_iter], coords)
-             
-              # Draw the RPM readout and label.
-              drawText(str(ecu.rpm), 0, 0, "readout") 
-              drawText("RPM", 0, 50, "label")
-              
-              # Draw the intake temp readout and label.
-              drawText(str(ecu.intakeTemp) + "\xb0C", 190, 105, "readout") 
-              drawText("Intake", 190, 140, "label")
-              
-              # Draw the coolant temp readout and label.
-              drawText(str(ecu.coolantTemp) + "\xb0C", -160, 105, "readout") 
-              drawText("Coolant", -170, 140, "label")
-              
-              # Draw the gear readout and label.
-              drawText(str(ecu.gear), -190, 0, "readout") 
-              drawText("Gear", -190, 50, "label")
-              
-              # Draw the speed readout and label.
-              drawText(str(ecu.speed) + " mph", 170, 0, "readout") 
-              drawText("Speed", 180, 50, "label")
-              
-              # Draw the throttle position readout and label.
-              drawText(str(ecu.throttlePosition) + " %", 190, -145, "readout") 
-              drawText("Throttle", 190, -110, "label")
+              #windowSurface.blit(ground[ecu.tach_iter], coords)
               
               # Draw the MAF readout and label.
               drawText(str(ecu.MAF) + " g/s", -150, -145, "readout") 
@@ -138,6 +115,43 @@ while True:
               # Draw the engine load readout and label.
               drawText(str(ecu.engineLoad) + " %", 0, -145, "readout") 
               drawText("Load", 0, -110, "label")
+              
+              # Draw the throttle position readout and label.
+              drawText(str(ecu.throttlePosition) + " %", 190, -145, "readout") 
+              drawText("Throttle", 190, -110, "label")
+              
+              # Draw the gear readout and label.
+              drawText(str(ecu.gear), -190, 0, "readout") 
+              drawText("Gear", -190, 50, "label")
+
+              # Draw the RPM readout and label.
+              drawText(str(ecu.rpm), 0, 0, "readout") 
+              drawText("RPM", 0, 50, "label")
+
+              # Draw the speed readout and label.
+              drawText(str(ecu.speed) + " mph", 170, 0, "readout") 
+              drawText("Speed", 180, 50, "label")
+              
+              # Draw the coolant temp readout and label.
+              drawText(str(ecu.coolantTemp) + "\xb0C", -160, 105, "readout") 
+              drawText("Coolant", -170, 140, "label")
+              
+              # Draw the coolant temp readout and label.
+              drawText(str(ecu.runTime) + " s", 0, 105, "readout") 
+              drawText("Run Time", 0, 140, "label")
+
+              # Draw the intake temp readout and label.
+              drawText(str(ecu.intakeTemp) + "\xb0C", 190, 105, "readout") 
+              drawText("Intake", 190, 140, "label")
+
+              # Draw the oil temp readout and label.
+              drawText(str(ecu.oilTemp) + "\xb0C", -160, 210, "readout") 
+              drawText("Oil Temp", -170, 245, "label")
+
+              # Draw the fuel level
+              drawText(str(ecu.fuelLevel) + " %", 0, 210, "readout") 
+              drawText("Fuel", 0, 245, "label")
+
               
               # If debug flag is set, feed fake data so we can test the GUI.
               if config.debugFlag:
