@@ -87,7 +87,7 @@ while True:
        # Clear the screen
        windowSurface.fill(config.BLACK)
        # Load the M3 logo
-       windowSurface.blit(img, (windowSurface.get_rect().centerx - 205,windowSurface.get_rect().centery + 60))
+       windowSurface.blit(img, (windowSurface.get_rect().centerx - 105,windowSurface.get_rect().centery + 60))
        
        # If the settings button has been pressed:
        if (config.settingsFlag):
@@ -148,7 +148,9 @@ while True:
               drawText(str(ecu.oilTemp) + "\xb0C", -160, 210, "readout") 
               drawText("Oil Temp", -170, 245, "label")
 
-
+              # Draw the fuel level
+              drawText(str(ecu.fuelLevel) + " %", 0, 210, "readout") 
+              drawText("Fuel", 0, 245, "label")
 
               
               # If debug flag is set, feed fake data so we can test the GUI.
