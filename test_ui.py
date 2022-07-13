@@ -30,7 +30,7 @@ background_files = ['%i.png' % i for i in range(1, 42)]
 ground = [pygame.image.load(os.path.join("/home/pi/dashboard/tach/", file)) for file in background_files]
 
 # Load the vw PI image.
-img = pygame.image.load("/home/pi/dashboard/images/vw_rabbit.png") 
+img = pygame.image.load("/home/pi/dashboard/images/vw_rabbit_black_icon_tiny.png") 
 img_button = img.get_rect(topleft=(0, 100))
 
 # Set up the window. If piTFT flag is set, set up the window for the screen. Else create it normally for use on normal monitor.
@@ -87,7 +87,7 @@ while True:
        # Clear the screen
        windowSurface.fill(config.BLACK)
        # Load the M3 logo
-       windowSurface.blit(img, (windowSurface.get_rect().centerx - 105,windowSurface.get_rect().centery + 60))
+       windowSurface.blit(img, (windowSurface.get_rect().centerx - 5,windowSurface.get_rect().centery + 120))
        
        # If the settings button has been pressed:
        if (config.settingsFlag):
