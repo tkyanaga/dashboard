@@ -31,7 +31,7 @@ ground = [pygame.image.load(os.path.join("/home/pi/dashboard/tach/", file)) for 
 
 # Load the vw PI image.
 img = pygame.image.load("/home/pi/dashboard/images/vw_rabbit.png") 
-img_button = img.get_rect(topleft=(0, -100))
+img_button = img.get_rect(topleft=(0, 100))
 
 # Set up the window. If piTFT flag is set, set up the window for the screen. Else create it normally for use on normal monitor.
 if config.piTFT:
@@ -106,7 +106,7 @@ while True:
               coords = (windowSurface.get_rect().centerx - 200, windowSurface.get_rect().centery - 200)
               
               # Load the tach image
-              windowSurface.blit(ground[ecu.tach_iter], coords)
+              #windowSurface.blit(ground[ecu.tach_iter], coords)
               
               # Draw the MAF readout and label.
               drawText(str(ecu.MAF) + " g/s", -150, -145, "readout") 
