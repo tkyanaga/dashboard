@@ -66,7 +66,7 @@ if config.debugFlag:
 # Run the game loop
 while True:
        for event in pygame.event.get():
-              if event.type == QUIT:
+              if event.type == pygame.QUIT:
                      # Rename our CSV to include end time. 
                      log.closeLog()
                      # Close the connection to the ECU. 
