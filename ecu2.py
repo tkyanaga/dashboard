@@ -78,8 +78,13 @@ class ecuThread(Thread):
 		connection.watch(obd.commands.GET_DTC, callback=self.new_dtc) 
 		connection.watch(obd.commands.RUN_TIME, callback=self.new_engine_run_time)
 		connection.watch(obd.commands.OIL_TEMP, callback=self.new_oil_temp)
+		connection.watch(obd.commands.DISTANCE_W_MIL, callback=self.new_dist)
+		
+		#odo supported on 2019+
 		if connection.supports(obd.commands.ODOMETER):
 			connection.watch(obd.commands.ODOMETER, callback=self.new_odometer)
+
+		#vehicle hardware and wiring needed for this
 		connection.watch(obd.commands.FUEL_LEVEL, callback=self.new_fuelLevel)
 
 		# Start the connection. 
